@@ -1,0 +1,37 @@
+<form action="/" method="GET">
+    <input name="city" placeholder="Enter your city" required />
+    <input type="submit" value="Get Forecast" />
+</form>
+
+{{#if forecast}}
+<h1 class="title">Weather for {{location.place_name}}</h1>
+<ul>
+    {{!-- <li>Temperatures: {{forecast.temp}}°C</li>
+    <li>Description: {{forecast.weather.0.description}}</li> --}}
+
+    <div class="container-fluid text-white my-auto weathercard">
+        <div class="container mx-auto my-4 py-4">
+            <div class="row justify-content-center text-center">
+                <h2 class="col-12 card-text city">{{location.text}}</h2>
+                <h3 class="col-12 card-text green">
+                    <p> Temperature: {{forecast.temp}}°C | {{forecast.fTemp}}°F</p>
+                </h3>
+                <h5> (Feels like: {{forecast.feels_like}}°C)</h5>
+                <h3 class="col-12 desc-text">
+                    <img src="https://openweathermap.org/img/wn/{{forecast.weather.[0].icon}}@2x.png" />
+                    {{forecast.weather.[0].description}}
+                </h3>
+            </div>
+        </div>
+    </div>
+    <div class="d-flex flex-wrap justify-content-center">
+        {{#each hourly}}
+        <div class="d-flex flex-column hourly">
+            <div> {{time}}</div>
+            <img src="https://openweathermap.org/img/wn/{{weather.[0].icon}}.png" />
+            <div> {{temp}}°C</div>
+        </div>
+        {{/each}}
+    </div>
+</ul>
+{{/if}}
